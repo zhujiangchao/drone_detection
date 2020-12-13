@@ -1,0 +1,21 @@
+## 分支命令
+查看分支 git branch -a
+切换到master分支 git checkout master 
+
+
+查看当前仓库的状态 git status
+
+将当前修改的文件添加到暂存区
+git add .
+git add progress.txt
+
+为当前的修改添加注释
+git commit -m "xxx"
+
+
+退送到远程分支
+git push
+
+
+## 查看当前分支的commit
+git log
