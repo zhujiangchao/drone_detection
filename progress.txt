@@ -1,3 +1,7 @@
 12.13
 paper note: 
 add pub key to github.com
+
+12.14
+install anaconda3 and cuda-11.1(not finished)
+read the paper(Real-Time Seamless Single Shot 6D Object Pose Prediction)
