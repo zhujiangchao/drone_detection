@@ -5,3 +5,7 @@ add pub key to github.com
 12.14
 install anaconda3 and cuda-11.1(not finished)
 read the paper(Real-Time Seamless Single Shot 6D Object Pose Prediction)
+
+12.15
+system crashed and reinstalled it
+use conda create a virtual env and install some packages
