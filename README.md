@@ -10,7 +10,7 @@ code: https://github.com/Mmmofan/YOLO_6D
 
 
 
-#### DenseFusion
+#### DenseFusion (徐龙)
 
 paper: DenseFusion: 6D Object Pose Estimation by Iterative Dense Fusion
 
@@ -24,7 +24,7 @@ code: https://github.com/j96w/6-PACK
 
 
 
-#### Deep Object Pose Estimation
+#### Deep Object Pose Estimation （樊家乐）
 
 paper: Deep Object Pose Estimation for Semantic Robotic Grasping of Household Objects
 
@@ -32,7 +32,7 @@ code: https://github.com/NVlabs/Deep_Object_Pose
 
 
 
-#### PVN3D
+#### PVN3D （方莹）
 
 paper: PVN3D: A Deep Point-wise 3D Keypoints Voting Network for 6DoF Pose Estimation
 
