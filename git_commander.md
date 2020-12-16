@@ -35,3 +35,4 @@ git checkout --orphan=fjl
 1. 对本地文件进行修改或增减
 2. git add .
 3. git commit -m "对提交的注释"  （重要）
+4. 提交到远程仓库：git push
