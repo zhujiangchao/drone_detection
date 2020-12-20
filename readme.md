@@ -16,7 +16,7 @@ DenseFusion的两大创新：
 
 主网络示意图如下：
 
-![main_network](main_network.png)
+![main_network](picts/main_network.png)
 
 #### （一）图像分割/目标检测
 
@@ -58,7 +58,7 @@ $$
 
 迭代优化器类似循环神经网络，示意图如下：
 
-![deputy_network](deputy_network.png)
+![deputy_network](picts/deputy_network.png)
 
 ##### 1.位姿残差估计器
 
