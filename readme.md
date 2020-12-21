@@ -20,3 +20,9 @@ next few days I will go back to school for classes
 when I go back to the lab, I will try to solve the loading problem.
 
 ![image-20201220160932595](picts/image-20201220160932595.png)
+
+## 12.21
+
+完成了bounding box的绘制
+
+![image-20201221230653119](picts/image-20201221230653119.png)
