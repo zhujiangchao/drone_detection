@@ -33,5 +33,7 @@ git checkout --orphan=fjl
 
 # 如何提交本地修改到远程仓库
 1. 对本地文件进行修改或增减
-2. git add .
+2. `git add .` 匹配所有修改的文件；`git add xxx` 匹配文件xxx 
 3. git commit -m "对提交的注释"  （重要）
+4. 提交到远程仓库：`git push`
+
