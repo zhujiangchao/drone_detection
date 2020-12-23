@@ -67,3 +67,46 @@ object localization
 image classification
 
 <img src="readme.assets/image-20201220182902148.png" alt="image-20201220182902148" style="zoom:67%;" />
+
+
+
+## 12.23
+
+### 配置环境  install pytorch1.0.1 with python3.7,cuda9.0
+
+昨天直接扒pytorch官网提供的命令
+
+```
+# CUDA 9.0
+conda install pytorch==1.0.1 torchvision==0.2.2 cudatoolkit=9.0 -c pytorch
+```
+
+结果晚上9点半走的时候pytorch还没下载完，今天一看果然失败了。不知道为啥科学上网了还是慢得吓人
+
+于是今天重新配环境
+
+#### 首先添加镜像源
+
+```
+conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge 
+conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+conda config --set show_channel_urls yes
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+```
+
+安装pytorch，后面不要添加-c pytorch，否则会从默认的地址下载pytorch，速度会很慢。
+
+```
+conda install pytorch==1.0.1 torchvision==0.2.2 cudatoolkit=9.0
+```
+
+运行下面的代码，没有报错就是安装成功了。
+
+```
+import torch
+import torchvision
+from torchvision import transforms as trans
+```
+
+又要去排练了，希望今天能好/(ㄒoㄒ)/~~
