@@ -10,7 +10,7 @@ code: https://github.com/Mmmofan/YOLO_6D
 
 
 
-#### DenseFusion (徐龙)
+#### DenseFusion (徐隆)
 
 paper: DenseFusion: 6D Object Pose Estimation by Iterative Dense Fusion
 
