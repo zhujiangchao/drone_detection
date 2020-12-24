@@ -95,7 +95,9 @@ conda config --set show_channel_urls yes
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 ```
 
-安装pytorch，后面不要添加-c pytorch，否则会从默认的地址下载pytorch，速度会很慢。
+#### 安装pytorch
+
+后面不要添加-c pytorch，否则会从默认的地址下载pytorch，速度会很慢。
 
 ```
 conda install pytorch==1.0.1 torchvision==0.2.2 cudatoolkit=9.0
@@ -110,3 +112,94 @@ from torchvision import transforms as trans
 ```
 
 又要去排练了，希望今天能好/(ㄒoㄒ)/~~
+
+
+
+## 12.24
+
+O(∩_∩)O~~今天成了！
+
+<img src="readme.assets/image-20201224130219646.png" alt="image-20201224130219646"  />
+
+ 
+
+### Install CUDA9.0
+
+**报错1**
+
+![image-20201224134559150](readme.assets/image-20201224134559150.png)
+
+解决办法
+
+```
+unset all_proxy    
+unset ALL_PROXY
+pip install pysocks
+source ~/.bashrc
+```
+
+
+
+**报错2**
+
+![image-20201224134708959](readme.assets/image-20201224134708959.png)
+
+解决办法
+
+```
+pip install pyyaml
+```
+
+
+
+**报错3**
+
+![image-20201224135644664](readme.assets/image-20201224135644664.png)
+
+解决办法
+
+```
+pip install 包名 -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com
+```
+
+#opencv_contrib_python==3.4.2.16
+
+**失败！！！**
+
+
+
+### pytorch1.5+cuda10.2
+
+看到PVN3D github里提供了pytorch1.5的方案，遂弃暗投明（希望是明/(ㄒoㄒ)/~~）
+
+
+
+通常，Ubuntu 18.04系统上安装的GCC和G++ 版本比较高，用下面的命令来查看电脑上的GCC和G++版本：
+
+```
+gcc --version
+g++ --version
+```
+
+我的电脑上安装的版本是7.5，因此需手动降级
+
+```
+sudo apt-get install gcc-4.8
+sudo apt-get install g++-4.8
+cd /usr/bin
+ls -l gcc*
+```
+
+对gcc和g++进行备份，并重新链接：
+
+```
+sudo mv gcc gcc.bak
+sudo ln -s gcc-4.8 gcc
+sudo mv g++ g++.bak
+sudo ln -s g++-4.8 g++
+```
+
+
+
+=.= 今天废了 以上
+
