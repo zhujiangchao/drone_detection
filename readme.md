@@ -18,7 +18,7 @@ https://openaccess.thecvf.com/content_CVPR_2020/papers/He_PVN3D_A_Deep_Point-Wis
 
    
 
-<img src="readme.assets/image-20201220162439025.png" alt="image-20201220162439025" style="zoom:67%;" />
+<img src="picts/image-20201220162439025.png" alt="image-20201220162439025" style="zoom:67%;" />
 
 
 
@@ -34,19 +34,19 @@ https://openaccess.thecvf.com/content_CVPR_2020/papers/He_PVN3D_A_Deep_Point-Wis
 
 3D关键点提取
 
-<img src="readme.assets/image-20201220163733320.png" alt="image-20201220163733320" style="zoom:67%;" />
+<img src="picts/image-20201220163733320.png" alt="image-20201220163733320" style="zoom:67%;" />
 
 
 
 
 
-<img src="readme.assets/image-20201220163901648.png" alt="image-20201220163901648" style="zoom:67%;" />
+<img src="picts/image-20201220163901648.png" alt="image-20201220163901648" style="zoom:67%;" />
 
 
 
 
 
-<img src="readme.assets/image-20201220164127351.png" alt="image-20201220164127351" style="zoom:67%;" />
+<img src="picts/image-20201220164127351.png" alt="image-20201220164127351" style="zoom:67%;" />
 
 
 
@@ -54,18 +54,19 @@ https://openaccess.thecvf.com/content_CVPR_2020/papers/He_PVN3D_A_Deep_Point-Wis
 
 instance semantic segmentation:
 
-<img src="readme.assets/image-20201220182742479.png" alt="image-20201220182742479" style="zoom:67%;" />
+<img src="picts/image-20201220182742479.png" alt="image-20201220182742479" style="zoom:67%;" />
 
 semantic segmentation
 
-<img src="readme.assets/image-20201220182807510.png" alt="image-20201220182807510" style="zoom:67%;" />
+<img src="picts/image-20201220182807510.png" alt="image-20201220182807510" style="zoom:67%;" />
 
 object localization
 
-<img src="readme.assets/image-20201220182839279.png" alt="image-20201220182839279" style="zoom:67%;" />
+<img src="picts/image-20201220182839279.png" alt="image-20201220182839279" style="zoom:67%;" />
 
 image classification
 
+<<<<<<< HEAD
 <img src="readme.assets/image-20201220182902148.png" alt="image-20201220182902148" style="zoom:67%;" />
 
 
@@ -203,3 +204,6 @@ sudo ln -s g++-4.8 g++
 
 =.= 今天废了 以上
 
+=======
+<img src="picts/image-20201220182902148.png" alt="image-20201220182902148" style="zoom:67%;" />
+>>>>>>> 5dfa576268daa7cadc456741a80c1482ef47cedf
