@@ -65,9 +65,9 @@ object localization
 <img src="picts/image-20201220182839279.png" alt="image-20201220182839279" style="zoom:67%;" />
 
 image classification
+ <img src="picts/image-20201220182902148.png" alt="image-20201220182902148" style="zoom:67%;" />
 
-<<<<<<< HEAD
-<img src="readme.assets/image-20201220182902148.png" alt="image-20201220182902148" style="zoom:67%;" />
+
 
 
 
@@ -204,6 +204,13 @@ sudo ln -s g++-4.8 g++
 
 =.= 今天废了 以上
 
-=======
-<img src="picts/image-20201220182902148.png" alt="image-20201220182902148" style="zoom:67%;" />
->>>>>>> 5dfa576268daa7cadc456741a80c1482ef47cedf
+
+
+## 12.25
+
+重启电脑后死在密码输入页面不能动，求助学长好papapa一顿操作终于能进入图像界面了，现在电脑是没有驱动和cuda的状态。
+
+pytorch1.0.1装上了，配好了requirements.txt的依赖包
+
+接下来要 install python-pcl和PointNet++
+
