@@ -75,7 +75,7 @@ Github项目地址：https://github.com/NVlabs/Deep_Object_Pose
 
 核心：**全部使用虚拟生成数据**（synthetic data），**同时**使用**DR数据**（domain randomization）和**写实风格数据**（photorealistic images)。数据是用他们自己开发的虚幻4（Unreal Engine 4）的插件NDDS生成的。
 
-![image-20201221204222352](冬学期第四周进度.assets/image-20201221204222352.png)
+![image-20201221204222352](readme.assets/image-20201221204222352.png)
 
 Domain randomization: 在具有多种干扰物的随机背景上放置物体。图片很明显不是实拍，图片中不遵循物理规律。
 
@@ -83,7 +83,7 @@ Photorealistic images: 把物体放置在具有物理约束的虚拟场景中，
 
 ### 实验结果
 
-![image-20201221205122254](冬学期第四周进度.assets/image-20201221205122254.png)
+![image-20201221205122254](readme.assets/image-20201221205122254.png)
 
 如图，相比poseCNN（用真实数据和生成数据训练），DOPE的结果相当或者更好，但poseCNN完全使用虚拟生成数据效果是很差的；DOPE单独使用DR数据或写实数据的效果明显不如同时使用两种数据训练。
 
