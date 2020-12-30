@@ -214,3 +214,56 @@ pytorch1.0.1装上了，配好了requirements.txt的依赖包
 
 接下来要 install python-pcl和PointNet++
 
+
+
+## 12.30
+
+在学长的帮助下配好了pytorch1.7+cuda10.2的环境
+
+下载好了Linemod数据集，有近9G，解压的时候要使用（大于2G时）
+
+```
+sudo apt-get install p7zip-full
+ 7z x file.zip -r -o /home/xx 
+ #x表示压缩文件，并且按原始目录
+ #-r表示递归所有子文件夹
+ #-o表示解压到指定的目录，-o后没有空格
+```
+
+若要压缩文件
+
+```
+7z a -t7z -r file.zip /home/manager/*
+#a代表添加文件/文件夹到压缩包
+#-t指定压缩类型，一般为7z
+#/home/manager/* 是要压缩的目录，＊是表示该目录下所有的文件
+```
+
+
+
+运行到这步时报错
+
+```
+python3 -m train.train_linemod_pvn3d --cls ape
+```
+
+![image-20201230193509396](readme.assets/image-20201230193509396.png)
+
+可是在这个环境下
+
+![image-20201230193540262](readme.assets/image-20201230193540262.png)
+
+是正常的
+
+
+
+a啊呜 原来python和sudo python下版本不一样啊
+
+
+
+然后还有一个问题是链接的时候 ln -s 接文件的地址包括文件名 后面是链接的包
+
+
+
+最后也终于完成ape和benchvise的demo，接下来的任务是把图片做成视频流然后看检测的帧率！
+
