@@ -95,6 +95,8 @@ NVIDIA驱动直接进入设置界面，选择使用最新的驱动，自动安�
 下载速度慢的情况下，建议翻墙。Ubuntu18.04装Cuda9.0要降级gcc，测试的时候不能忘记手动ldconfig添加动态链接库。
 
 
+
+
 ## 12.26
 
 莫名奇妙地发现显卡驱动掉了，重装时候总是make报错，怀疑是gcc版本原因，在学长的帮助下重装显卡驱动，验证果然是gcc版本问题。遂决定卸载cuda9，直接安装cuda10。
@@ -112,9 +114,152 @@ cuda10.0+cudnn7.6.5安装测试完毕。重新下载pytoch1.0.1，在墙外的�
 从源码略读中，知道了一些网络的细节。
 
 1. 点云中N数值为500（多的就随机删除了），与W×H的图像融合时，选择对应的500个点融合，如果W×H<500，用零填补。
-2. 每一帧真正的点云信息target获取依赖于数据集的第一帧图像点云
-3. 融合时，利用卷积+relu激活，获得颜色段128维，几何段256维，全局段1024维
-4. target：第一帧点云通过变换来的；points：根据深度图和相机内参获得的
-5. 优化器：target和points通过估计得到的Rt，反变换到相机坐标系原点后肯定是target更准确，因为他是标准的，points可能因分割或遮挡导致差错
-6. 优化器几何输入的确是将points转为相机坐标系原点后作为输入。
+2. 每一帧真正的点云信息获取依赖于数据集的第一帧图像点云
+3. 颜色特征32维，几何特征3维（直接用的点云？）
+4. 融合时，利用卷积+relu激活，获得颜色段128维，几何段256维，全局段1024维
+5. target：第一帧点云通过变换来的；points：根据深度图和相机内参获得的
+6. 优化器：target和points通过估计得到的Rt，反变换到相机坐标系原点后肯定是target更准确，因为他是标准的，points可能因分割或遮挡导致差错
+7. 优化器几何输入的确是将points转为相机坐标系原点后作为输入。
 
+
+
+## 12.29
+
+在做完一堆准备工作后，下载Linemod数据集并进行测试。
+
+### （一）Linemod数据集
+
+- **data**
+  - **01-15**
+    - **depth(dir)：深度图，png文件**
+    - **mask(dir)：标准分割结果，物体轮廓内为1，其他为0，png文件**
+    - **rgb(dir)：RGB图像，png文件**
+    - **gt.yml：拍摄每张图片时相机的R和t、目标物体的标准框、每张图片目标物体的类别**
+    - **info.yml：拍摄每张图片时摄像头的内参和深度缩放的比例**
+- **segnet_results**
+  - **01-15_label(dir)：PoseCNN目标检测模块获得的分割结果，物体轮廓内为1，其他为0，png文件**
+- **models**
+  - **models_info.yml：每个目标点云模型的半径、xyz轴范围**
+  - **obj_01-15.ply：以\data\xx\rgb\0000.png为基准的点云数据**
+
+#### PS：
+
+自己下载Linemod数据集等总是网络错误，在朱江超学长帮助下成功下载，怀疑是梯子不稳导致。
+
+### （二）测试
+
+- **代码：**
+
+  - **所需输入：**数据根目录、主干网络模型、迭代优化器模型
+  - **检测指标：**标准点云和相机获得点云转到当前相机坐标的平均距离，小于目标点云模型半径则合格
+  - **输出结果：**日志文件和终端
+    - 每张图片的测试通过与否和平均距离大小
+    - 每个物体的检测通过率和整体通过率
+
+- **坑与解决方案：**
+
+  - **KNN：**由于作者编写了CUDA_KNN算法，不同环境.so文件和knn_pytorch.py需要重新获取：
+
+    ```
+    xulong@xulong-wk:~/densefusion/lib/knn$ python setup.py install
+    xulong@xulong-wk:~/densefusion/lib/knn/dist$ unzip knn_pytorch-0.1-py3.5-linux-x86_64.egg
+    ```
+
+    还需将.so文件和knn_pytorch.py复制到对应目录。
+
+  - **OpenCV：**由于OpenCV版本更新，findContours函数输出参数改变：
+
+    ```
+    #_, contours, _ = cv2.findContours(...)
+    contours, _ = cv2.findContours(...)
+    ```
+
+    即将该函数输出的第一个参数删去。
+
+- **运行图像：**
+
+  执行脚本：
+
+  ```
+  ./experiments/scripts/eval_linemod.sh
+  ```
+
+  终端输出：
+
+  ![test_begin](picts/test_begin.jpg)
+
+![test_end](picts/test_end.jpg)
+
+
+
+## 12.30
+
+开始训练。
+
+### （一）代码
+
+- **搭建网络：**
+
+  ```python
+  estimator = PoseNet(num_points = opt.num_points, num_obj = opt.num_objects)
+  refiner = PoseRefineNet(num_points = opt.num_points, num_obj = opt.num_objects)
+  ```
+
+- **加载数据：**
+
+  ```python
+  dataset = PoseDataset_linemod('train', opt.num_points, True, opt.dataset_root, opt.noise_trans, opt.refine_start)
+  dataloader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=True, num_workers=opt.workers)
+  ```
+
+- **循环迭代训练：**
+
+  - **每轮过后判断主网是否抵达要求，达到则开始同时训练迭代优化器**
+
+    ```python
+    if best_test < opt.refine_margin and not opt.refine_start:
+    ```
+
+### （二）训练
+
+执行脚本：
+
+```
+./experiments/scripts/train_linemod.sh
+```
+
+终端输出：
+
+![train_begin](picts/train_begin.jpg)
+
+![train_ing](picts/train_ing.jpg)
+
+在训练到第六轮，准备同时训练迭代优化器时出错：
+
+```python
+RuntimeError: the derivative for 'index' is not implemented
+```
+
+原因是pytorch函数index_select函数版本问题：
+
+```python
+# lib/loss_refiner.py line45
+# target = torch.index_select(target, 1, inds.view(-1) - 1)
+target = torch.index_select(target, 1, inds.view(-1).detach() - 1)
+```
+
+此时训练中断，但不必回头重来，加载已经训练了一段时间的模型即可：
+
+```python
+python ./tools/train.py --dataset linemod --dataset_root ./datasets/linemod/Linemod_preprocessed --resume_posenet pose_model_current.pth
+```
+
+随后正常训练，进入漫长的等待环节。。。
+
+
+
+## 01.02
+
+训练到一半cuda掉了，重新来过。
+
+深入阅读代码，了解其测试过程，并了解OpenCV基于视频流的检测原理，准备编写代码，将预测结果以点云重投影至图像的形式制作视频demo
