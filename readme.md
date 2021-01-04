@@ -263,3 +263,13 @@ python ./tools/train.py --dataset linemod --dataset_root ./datasets/linemod/Line
 训练到一半cuda掉了，重新来过。
 
 深入阅读代码，了解其测试过程，并了解OpenCV基于视频流的检测原理，准备编写代码，将预测结果以点云重投影至图像的形式制作视频demo
+
+
+
+## 01.03
+
+训练一半cuda又掉了，应该是显卡有点菜的缘故。
+
+参考源码中的dataset.py和eval_linemod,sh编写了mytest.py和mytest.sh，借用OpenCV实现读图、检测、点云重投影，到视频的呈现。下面是用手机录制的视频，其中展示了检测结果和fps，fps和作者提供的视频差不多，在20左右，由于linemod数据集并非连续的一帧帧的视频，因此看起来会有点跳，下面是视频地址。或者也可以到video文件夹下看。
+
+https://youtu.be/jegaQdEzxTI
